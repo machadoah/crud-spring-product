@@ -5,6 +5,7 @@ import com.medium.machadoah.crudtutorial.dto.RequestProductDTO;
 import com.medium.machadoah.crudtutorial.dto.UpdateProductDTO;
 import com.medium.machadoah.crudtutorial.repository.ProductRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -44,7 +45,7 @@ public class ProductController {
             product.setPrice_in_cents(data.price_in_cents());
             return ResponseEntity.ok(product);
         } else {
-            return ResponseEntity.notFound().build();
+            throw new EntityNotFoundException();
         }
     }
 
@@ -57,7 +58,7 @@ public class ProductController {
             product.setActive(false);
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.notFound().build();
+            throw new EntityNotFoundException();
         }
     }
 
